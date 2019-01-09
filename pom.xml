@@ -93,6 +93,12 @@
             <version>1.4.7.RELEASE</version>
         </dependency>
 
+        <!-- RabbitMQ-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+
 
 
 

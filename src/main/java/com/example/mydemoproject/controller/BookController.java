@@ -7,6 +7,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,11 @@ public class BookController {
 
     @Autowired
     private BookService bookService;
+
+
+    @Autowired
+    private AmqpTemplate rabbitTemplate;
+
 
     /*
     @GetMapping("/books/page/{pageNumber}")
@@ -109,7 +115,10 @@ public class BookController {
 
     @ApiOperation("Delete one book")
     @DeleteMapping("/users/{id}")
-    public void deleteBook(@PathVariable("id") Long id) {
-        bookService.deleteBook(id);
+    public void deleteBook(@PathVariable("id") Long id)
+    {
+        rabbitTemplate.convertAndSend("hello", id);
+
+        //bookService.deleteBook(id);
     }
 }
