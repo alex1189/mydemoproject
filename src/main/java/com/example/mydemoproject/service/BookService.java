@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface BookService {
 
-    List<Book> findAllBook( );
+    List<Book> findAllBook( int page, int limit);
 
 
     Book findBookById(Long id);

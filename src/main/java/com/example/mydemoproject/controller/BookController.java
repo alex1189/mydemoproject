@@ -46,18 +46,18 @@ public class BookController {
         PageHelper.startPage(_page, _limit);
         System.out.println(_searchText);
         System.out.println(_page);
-        System.out.println("null");
         System.out.println(_searchText.getClass());
         List<Book> booksList;
         if(_searchText.equals("undefined")) {
-            booksList = bookService.findAllBook();
-            System.out.println("find");
+            booksList = bookService.findAllBook(_page, _limit);
+            System.out.println("good"+booksList);
         }else{
             booksList = bookService.searchBook(_searchText);
             System.out.println("search");
 
         }
         PageInfo<Book> booksPageInfo = new PageInfo<>(booksList);
+        System.out.println(booksPageInfo);
         return JSON.toJSONString(booksPageInfo);
     }
 

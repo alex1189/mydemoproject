@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 public interface BookDao {
 
-    List<Book> findAllBook( );
+    List<Book> findAllBook();
 
     Book findById(@Param("id") Long id);
 

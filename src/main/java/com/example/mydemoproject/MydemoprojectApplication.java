@@ -6,10 +6,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.cache.annotation.EnableCaching;
 
 @SpringBootApplication
 @ServletComponentScan
 @MapperScan("com.example.mydemoproject.dao")
+@EnableCaching
 public class MydemoprojectApplication extends SpringBootServletInitializer {
 
     @Override

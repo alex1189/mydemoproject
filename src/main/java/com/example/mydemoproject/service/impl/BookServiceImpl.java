@@ -4,6 +4,8 @@ import com.example.mydemoproject.dao.BookDao;
 import com.example.mydemoproject.model.Book;
 import com.example.mydemoproject.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +15,9 @@ public class BookServiceImpl implements BookService {
     @Autowired
     private BookDao bookDao;
 
-    public List<Book> findAllBook( ){
+    @Cacheable(value="UserCache",key = "T(String).valueOf(#page).concat('-').concat(#limit)")
+    public List<Book> findAllBook(int page, int limit ){
+        System.out.println("mysql select");
         return bookDao.findAllBook();
     }
 
@@ -27,6 +31,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @CacheEvict(value="UserCache",key="'bookDao.findAllBook'")
     public void updateBook(Book book) {
         bookDao.updateBook(book);
     }
